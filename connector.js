@@ -98,9 +98,6 @@ post(callback) {
     if (getCallOptions.query) {
       uri = uri + '?' + getCallOptions.query;
     }
-    console.log(`************************`);
-    console.log(`The getCalloptions.query is ${getCallOptions.query}`);
-    console.log(`************************`);   
     return uri;
   }
 
