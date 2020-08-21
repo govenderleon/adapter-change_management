@@ -15,6 +15,7 @@ const request = require('request');
 
 // We'll use this regular expression to verify REST API's HTTP response status code.
 const validResponseRegex = /(2\d\d)/;
+
 /**
  * @callback iapCallback
  * @description A [callback function]{@link
@@ -80,6 +81,10 @@ function isHibernating(response) {
  * @param {error} callback.error - The error property of callback.
  */
 function processRequestResults(error, response, body, callback) {
+  // Initialize return arguments for callback
+    let callbackData = null;
+    let callbackError = null;
+
   /**
    * You must build the contents of this function.
    * Study your package and note which parts of the get()
@@ -88,8 +93,6 @@ function processRequestResults(error, response, body, callback) {
    * This function must not check for a hibernating instance;
    * it must call function isHibernating.
    */
-   let callbackData = null;
-   let callbackError = null;
     if (error) {
       console.error('Error present.');
       callbackError = error;
@@ -103,7 +106,8 @@ function processRequestResults(error, response, body, callback) {
       callbackData = response;
     }
     return callback(callbackData, callbackError);
-}
+  };
+
 
 
 /**
@@ -134,16 +138,16 @@ function sendRequest(callOptions, callback) {
    * from the previous lab. There should be no
    * hardcoded values.
    */
-   const requestOptions = {
-     method: callOptions.method,
-     auth: {
-       user: options.username,
-       pass: options.password,
-     },
-     baseUrl: options.url,
-     uri: uri,
+  const requestOptions = {
+    method: callOptions.method,
+    auth: {
+      user: options.username,
+      pass: options.password,
+    },
+    baseUrl: options.url,
+    uri: uri,
   };
-
+  
   request(requestOptions, (error, response, body) => {
     processRequestResults(error, response, body, (processedResults, processedError) => callback(processedResults, processedError));
   });
