@@ -5,7 +5,6 @@ const options = {
   password: 'Chaydin1!',
   serviceNowTable: 'change_request'
 };
-
 // Import built-in Node.js package path.
 const path = require('path');
 
@@ -33,12 +32,11 @@ function mainOnObject() {
     }
     console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`)
   });
-
   connector.post((data, error) => {
     if (error) {
-      console.error(`\nError returned from GET request:\n${JSON.stringify(error)}`);
+      console.error(`\nError returned from POST request:\n${JSON.stringify(error)}`);
     }
-    console.log(`\nResponse returned from GET request:\n${JSON.stringify(data)}`)
+    console.log(`\nResponse returned from POST request:\n${JSON.stringify(data)}`)
   });
 
 }
