@@ -235,18 +235,19 @@ healthcheck(callback) {
       if (error) {
         callback([], error)
       } else if (results.body) {
-        let entry = JSON.parse(results.body.result);
+        let entry = JSON.parse(results.body);
+        let result_entry = entry.result;
         let newEntry = [{
-            change_ticket_number: entry.number,
-            change_ticket_key: entry.sys_id,
-            active: entry.active,
-            priority: entry.priority,
-            description: entry.description,
-            work_start: entry.work_start,
-            work_end: entry.work_end
+            change_ticket_number: result_entry.number,
+            change_ticket_key: result_entry.sys_id,
+            active: result_entry.active,
+            priority: result_entry.priority,
+            description: result_entry.description,
+            work_start: result_entry.work_start,
+            work_end: result_entry.work_end
         }];
-      }
         callback(newEntry, error);
+      }        
     });
   }
 }
