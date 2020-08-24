@@ -192,27 +192,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * get() takes a callback function.
      */
-    this.connector.get((results, error) => {
-      let newResults = [];
-      if (error) {
-        callback(newResults, error)
-      } else if (results.body) {
-        let jsonResults = JSON.parse(results.body);
-        jsonResults.result.forEach((entry) => {
-            let newEntry = {
-                change_ticket_number: entry.number,
-                change_ticket_key: entry.sys_id,
-                active: entry.active,
-                priority: entry.priority,
-                description: entry.description,
-                work_start: entry.work_start,
-                work_end: entry.work_end
-            };
-            newResults.push(newEntry);
-        })
-        callback(newResults, error);
-      }
-    });
+    this.connector.get((results, error) => callback(results, error));
   }
 
   /**
@@ -231,23 +211,7 @@ healthcheck(callback) {
      * Note how the object was instantiated in the constructor().
      * post() takes a callback function.
      */
-    this.connector.post((results, error) => {
-      if (error) {
-        callback([], error)
-      } else if (results.body) {
-        let entry = JSON.parse(results.body.result);
-        let newEntry = [{
-            change_ticket_number: entry.number,
-            change_ticket_key: entry.sys_id,
-            active: entry.active,
-            priority: entry.priority,
-            description: entry.description,
-            work_start: entry.work_start,
-            work_end: entry.work_end
-        }];
-      }
-        callback(newEntry, error);
-    });
+    this.connector.post((results, error) => callback(results, error));
   }
 }
 
